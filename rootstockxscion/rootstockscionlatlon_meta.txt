@@ -1,0 +1,44 @@
+Started 16 May 2023
+Started by Lizzie
+
+rootstockscionlatlon.csv is a subsample of 100 papers from an ISI search. The goal is mainly to get the lat/lon for where grape rootstock by scion experiments have happened. 
+
+It has the paper ID in the first column. You need to match it to corresponding row number in isi_5May2023.csv, then try to find a full-text copy of the paper from UBC library (be sure to be on the campus wifi and logged into the library) or unpaywall.org and then fill out the following columns:
+
+author: paste from isi_5May2023.csv
+
+year: paste from isi_5May2023.csv
+
+title: paste from isi_5May2023.csv
+
+use: yes or no
+
+ifno_why: if you wrote no, why? Mostly I have found this is because it is not actually a grape paper, so just note the other fruit/crop. If you have another reason, note it briefly. 
+
+where: (optional to fill in) -- if they say where, write it in
+
+lat: latitude of where rootstock x scion experiment happened
+
+lon: longitude of where rootstock x scion experiment happened
+
+how: how you figured out lat/lon; if they gave the lat/lon or a specific location you could find, then leave blank. If you needed to guess at it based on affiliations or such, please note that. 
+
+paper_link: if you find the link to the paper, paste it here, otherwise, leave blank
+
+who: enter your initials for who entered it 
+
+n_scions: (optional to fill in) -- if you can *easily and quickly* grab the number of unique scion varieties, write it in (count varieties, not clones). Scion names you will generally recognize and should be words. 
+
+n_rootstock: (optional to fill in) -- if you can  *easily and quickly* grab the number of unique roostocks, write it in (count varieties, not clones). Rootstock names are varied -- often they are letters and numbers, sometimes words. Some examples: IAC 313, IAC 572, IAC 766, SO4, Paulsen 1103 and Harmony
+
+Geting location data:
+
+When they give the location I put it in google maps and then left-click and copy the first row (lat/long). 
+
+Converting to decimal when needed:
+https://www.fcc.gov/media/radio/dms-decimal
+
+If you cannot get the full text and so have to guess at the location, that is okay. Just be sure to try to find the full text first. 
+
+
+You can use the resulting data to update the map (if you want) by running: analyses/maprxsexpts.R 
