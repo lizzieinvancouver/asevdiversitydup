@@ -51,3 +51,4 @@ grapeyears2022 <- subset(grapeyears, Publication.Year<2023)
 
 plot(n_publications~Publication.Year, data=grapeyears2022, pch=16)
 lines(n_publications~Publication.Year, data=grapeyears2022)
+
