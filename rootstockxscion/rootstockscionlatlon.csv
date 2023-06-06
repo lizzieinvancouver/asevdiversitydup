@@ -29,7 +29,7 @@ id,author,year,title,use,ifno_why,where,lat,lon,how,paper_link,who,n_scions,n_ro
 440,"Moore, GA; Luth, D; Febres, VJ; McCaffery, M; Garnsey, SM; Niblett, CL",2000,Agrobacterium-mediated transformation of grapefruit (Citrus paradisi Macf.) with genes from citrus tristeza virus,no,grapefruit,,,,,,crd,,,
 214,"Clingeleffer, PR; Kerridge, GH; Ruhl, EH",2022,Rootstock effects on growth and fruit composition of low-yielding winegrape cultivars grown in a hot Australian climate,yes,,CSIRO Merbein,-34.258248,142.134163,"location of the station is given in paper, converted to decimal",https://onlinelibrary.wiley.com/doi/epdf/10.1111/ajgw.12533,crd,7,5,
 50,"Mare, C; Mica, E; Cattivelli, L",2016,Molecular advances in rootstock-scion interaction in grapevine,no,review,,,,,https://www.actahort.org/books/1136/1136_21.htm,crd,,,"review paper, lots of interesting data from different locations"
-350,"Walker, MA; Heinitz, C; Riaz, S; Uretsky, J",2019,Grape Taxonomy and Germplasm,no,review,,,,,https://link.springer.com/chapter/10.1007/978-3-030-18601-2_2,crd,,,
+350,"Walker, MA; Heinitz, C; Riaz, S; Uretsky, J",2019,Grape Taxonomy and Germplasm,no,book,,,,,https://link.springer.com/chapter/10.1007/978-3-030-18601-2_2,crd,,,
 381,"Lavoie-Lamoureux, A; Sacco, D; Risse, PA; Lovisolo, C",2017,Factors influencing stomatal conductance in response to water availability in grapevine: a meta-analysis,no,review,,,,,https://pubmed.ncbi.nlm.nih.gov/27859326/,crd,,,
 287,"Barrios-Masias, FH; Knipfer, T; McElrone, AJ",2015,Differential responses of grapevine rootstocks to water stress are associated with adjustments in fine root hydraulic physiology and suberization,yes,,"University of California, Davis",38.53855348,-121.7609058,"location of the station is given in paper, converted to decimal",https://pubmed.ncbi.nlm.nih.gov/26160580/,crd,NA,2,only rootstocks were grown
 91,"Nemeth, G; Molnar, Z; Podmaniczky, P; Sardy, DN; Kallay, M; Dunai, A; Kocsis, L",2017,TRANS-RESVERATROL CONTENT IN GRAPE CANE AND ROOT OF DIFFERENT SCION-ROOTSTOCK COMBINATIONS,yes,,"Experimental Vineyard of the Georgikon Faculty University of Pannonia,Cserszegtomaj",46.829167,17.254444,"in paper, converted to decimal",https://www.cabdirect.org/cabdirect/abstract/20183103189,crd,2,5,
@@ -41,7 +41,7 @@ id,author,year,title,use,ifno_why,where,lat,lon,how,paper_link,who,n_scions,n_ro
 188,"Miele, A; Rizzon, LA",2019,Rootstock-scion interaction: 4. Effect on the sensory characteristics of Cabernet Sauvignon wine,yes,,Serra Gaúcha,-29.162222,-51.530556,"in paper, converted to decimal",https://www.scielo.br/j/rbf/a/FfSC8QRJXVZmQMy3fkS3G3p/?lang=en,crd,1,15,
 124,"Cheng, J; Li, HQ; Wang, WR; Duan, CQ; Wang, J; He, F",2020,The influence of rootstocks on the scions' aromatic profiles of Vitis vinifera L. cv. Chardonnay,yes,,"Shangzhuang Experimental Station of China Agricultural University in Haidian District, Beijing, China",40.14,116.19,in paper,https://www.sciencedirect.com/science/article/pii/S0304423820303459,crd,1,5,
 76,"Verma, SK; Singh, SK; Krishna, H",2010,The Effect of Certain Rootstocks on the Grape Cultivar 'Pusa Urvashi' (Vitis vinifera L.),yes,,"Central Institute of Temperate HorticultureRegional Station, Mukteshwar, Uttarakhand",29.45691882,79.65459643,address of correspondance of last author,https://www.researchgate.net/publication/233090945_The_Effect_of_Certain_Rootstocks_on_the_Grape_Cultivar_'Pusa_Urvashi'_Vitis_vinifera_L,crd,1,4,in glasshouse
-349,"Kapazoglou, A; Tani, E; Avramidou, EV; Abraham, EM; Gerakari, M; Megariti, S; Doupis, G; Doulis, AG",2021,Epigenetic Changes and Transcriptional Reprogramming Upon Woody Plant Grafting for Crop Sustainability in a Changing Environment,no,review of woody plants,,,,,https://pubmed.ncbi.nlm.nih.gov/33510757/,crd,,,
+349,"Kapazoglou, A; Tani, E; Avramidou, EV; Abraham, EM; Gerakari, M; Megariti, S; Doupis, G; Doulis, AG",2021,Epigenetic Changes and Transcriptional Reprogramming Upon Woody Plant Grafting for Crop Sustainability in a Changing Environment,no,woody plants,,,,,https://pubmed.ncbi.nlm.nih.gov/33510757/,crd,,,
 116,"Serra, I; Strever, A; Myburgh, P; Schmeisser, M; Deloire, PA",2017,Grapevine (Vitis vinifera L. 'Pinotage') leaf stomatal size and density as modulated by different rootstocks and scion water status,yes,,"Stellenbosch	 University,	 Stellenbosch,	 South	 Africa",-33.932834,18.864608,"probably conducted at Stellenbosch University, DVO, but not explicity given",https://www.actahort.org/books/1157/1157_26.htm,crd,1,2,in greenhouse
 437,"Retief, E; McLeod, A; Fourie, PH",2006,Potential inoculum sources of Phaeomoniella chlamydospora in South African grapevine nurseries,yes,,"Department of Plant Pathology, University of Stellenbosch,",-33.93285803,18.86609568,"probably conducted at Stellenbosch University, but not explicity given",https://pubmed.ncbi.nlm.nih.gov/32214676/,crd,NA,NA,
 47,"Cochetel, N; Meteier, E; Merlin, I; Hevin, C; Pouvreau, JB; Coutos-Thevenot, P; Hernould, M; Vivin, P; Cookson, SJ; Ollat, N; Lauvergeat, V",2018,Potential contribution of strigolactones in regulating scion growth and branching in grafted grapevine in response to nitrogen availability,yes,,"Université de Bordeaux, EGFV",44.77636858,-0.566900272,"they thank the staff of the lab, which is in Bordeaux",https://academic.oup.com/jxb/article/69/16/4099/5025840,crd,1,2,in greenhouse
@@ -56,7 +56,7 @@ id,author,year,title,use,ifno_why,where,lat,lon,how,paper_link,who,n_scions,n_ro
 318,"Nas, MN; Read, PE",2003,"Simultaneous micrografting, rooting and acclimatization of micropropagated American chestnut, grapevine and hybrid hazelnut",yes,,"Department of Horticulture, Kahramanmaras, Turkey",37.58092232,36.92843776,based on author affiliation,https://www.researchgate.net/publication/287692832_Simultaneous_Micrografting_Rooting_and_Acclimatization_of_Micropropagated_American_Chestnut_Grapevine_and_Hybrid_Hazelnut,crd,1,1,
 422,"Sluiter, IRK; McKenzie, L; Mitchell, JR",2014,Walnut Rootstock Selection for Calcareous Soils in Southeastern Australia and the Potential for Expanding the Walnut Industry in the Region,no,walnut,,,,,,crd,,,
 316,"Ritenour, MA; Dou, H; Bowman, KD; Boman, BJ; Stover, E; Castle, WS",2004,Effect of rootstock on stem-end rind breakdown and decay of fresh citrus,no ,citrus,,,,,,crd,,,
-386,"Conde, A; Breia, R; Moutinho-Pereira, J; Grimplet, J; Geros, H",2016,Metabolic rearrangements in grapevine response to salt stress,no,review,,,,,,crd,,,
+386,"Conde, A; Breia, R; Moutinho-Pereira, J; Grimplet, J; Geros, H",2016,Metabolic rearrangements in grapevine response to salt stress,no,irrelevant,,,,,,crd,,,
 268,"Wolpert, JA; Smart, DR; Anderson, M",2005,Lower petiole potassium concentration at bloom in rootstocks with Vitis berlandieri genetic backgrounds,yes,,"Sacramento River Delta, near the town of Hood.",38.36554033,-121.5189197,took the location of the town given in the article,https://www.ajevonline.org/content/56/2/163,crd,2,14,cab S. and chardonnay
 268,"Wolpert, JA; Smart, DR; Anderson, M",2005,Lower petiole potassium concentration at bloom in rootstocks with Vitis berlandieri genetic backgrounds,yes,,Amador County’s Shenandoah Valley,38.52699816,-120.8080655,took the location of the region given in the article,https://www.ajevonline.org/content/56/2/163,crd,1,14,zinfandel
 249,"Dutt, M; Li, ZT; Kelley, KT; Dhekney, SA; Van Aman, M; Tattersall, J; Gray, DJ",2007,Transgenic rootstock protein transmission in grapevines,yes,,"Unite de Recherche Vigne et Vin de Champagne,",43.94961113,4.81681644,based on author affiliation,https://www.sciencedirect.com/science/article/pii/S0168945205004139,crd,1,1,
@@ -104,3 +104,19 @@ id,author,year,title,use,ifno_why,where,lat,lon,how,paper_link,who,n_scions,n_ro
 394,"Wolf, T; Eimert, K; Bleser, E; Ries, R",1998,PCR/RAPD to determine the genotype of wooden rootstock cuttings,no,can't have access;at woodward,,,,,https://www.actahort.org/books/473/473_4.htm,crd,,,
 216,"Bravdo, B",2012,Effects of Salinity and Irrigation with Desalinated Effluent and Sea Water on Production and Fruit Quality of Grapevines (Review and Update),no,can't have access;at woodward,,,,,https://www.actahort.org/books/931/931_27.htm,crd,,,
 65,"Bidabadi, SS; Sabbatini, P",2020,"Bioaccumulation, Ionome and Physiological Responses to Copper Toxicity of Iranian Grapevine Rootstocks Grafted with 'Asgari' Seedless Grape",yes,," Isfahan University of Technology, Department of Horticultural Sciences",32.71918826,51.53263878,"took the location of Isfahan University of Technology, Department of Horticultural Sciences",https://www.tandfonline.com/doi/full/10.1080/15538362.2019.1652133,crd,1,2,in glasshouse
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,, ,,,,,,,,,,,,
