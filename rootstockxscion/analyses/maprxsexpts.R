@@ -13,26 +13,32 @@ library(tidyverse)
 # following along:
 # https://www.geeksforgeeks.org/how-to-make-world-map-with-ggplot2-in-r/
 
-# working directory
-setwd("~/Documents/git/projects/vin/general/docs/manuscripts/asevdiversity/rootstockxscion/")
+#Directory Lizzie
+#setwd("~/Documents/git/projects/vin/general/docs/manuscripts/asevdiversity/rootstockxscion/")
+#Directory Christophe
+directory_path <- "/Users/christophe_rouleau-desrochers/Documents/github"
+# Set Working Directory
+setwd(directory_path)
 
-d <- read.csv("rootstockscionlatlon.csv")
+#work directory
+d <- read.csv("asevdiversitydup/rootstockxscion/rootstockscionlatlon.csv")
 
 duse <- subset(d, use=="yes")
 
 world_coordinates <- map_data("world")
-ggplot() + geom_map(
+plot<-ggplot() + geom_map(
     data = world_coordinates, map = world_coordinates,
     aes(long, lat, map_id = region),
     color = "white", fill = "lightgray", size = 0.1  ) + 
 geom_point(
     data = duse,
-    aes(lon, lat, color="darkblue"), # darkblue
+    aes(lon, lat, color="darkblue"),
     alpha = 0.7
 ) +
     theme_bw() + 
     theme(legend.position="none")
-
+plot
+str(duse)
 ## Looking at all recs...
 alld <- read.csv("isi_5May2023.csv")
 
