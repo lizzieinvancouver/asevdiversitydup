@@ -74,7 +74,7 @@ fig <- fig %>% add_trace(
 # Add lon and lat points to the map, where each location point is related to papers title
 fig <- fig %>% add_markers(
   x = ~duse$lon, y = ~duse$lat,
-  text =~duse$title , color = I("black"), size = I(0.5)
+  text =~duse$title , color = I("orange2"), size = I(8)
 )
 # Set color bar
 fig <- fig %>% colorbar(title = 'Occurence')
