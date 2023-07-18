@@ -8,9 +8,7 @@
 ## Source from:     https://plotly.com/r/choropleth-maps/
 #===================================
 
-# housekeeping
-rm(list=ls())  
-options(stringsAsFactors=FALSE)
+
 
 ### Install packages if not already in system library
 # install.packages("devtools")
@@ -36,7 +34,7 @@ setwd(directory_path)
 d <- read.csv("asevdiversitydup/rootstockxscion/rootstockscionlatlon.csv")
 
 duse <- subset(d, use=="yes")
-
+head(duse)
 # Delete rows where multiple locations for the same paper to avoid redundancy
 duse_no_dupplicats<-duse[!duplicated(duse$title),]
 # Create a new table grouped by country and the number of papers published in each
@@ -74,7 +72,7 @@ fig <- fig %>% add_trace(
 # Add lon and lat points to the map, where each location point is related to papers title
 fig <- fig %>% add_markers(
   x = ~duse$lon, y = ~duse$lat,
-  text =~duse$title , color = I("orange2"), size = I(8)
+  text =~duse$title , color = I("black"), size = I(8)
 )
 # Set color bar
 fig <- fig %>% colorbar(title = 'Occurence')
@@ -85,12 +83,60 @@ fig <- fig %>% layout(
 )
 fig
 
-### Install reticulate for export
-#install.packages('reticulate')
-#reticulate::install_miniconda()
-#reticulate::conda_install('r-reticulate', 'python-kaleido')
-#reticulate::conda_install('r-reticulate', 'plotly', channel = 'plotly')
-#reticulate::use_miniconda('r-reticulate')
 
-save_image(fig, "asevdiversitydup/figures/mercator_worldmap.png", scale=15)
+# Calculate the dot size based on `duse$nb_scion`
+dot_size <- 2 + log(duse$n_rootstock)
+dusecut <- duse [, c("id", "year", "use", "lat", "lon", "n_scions", "n_rootstock", "COUNTRY", "CODE")]
+head(dusecut)
+dusecut$n_rootstock <- as.numeric(dusecut$n_rootstock)
+dusecut$dotsize_scions <- 2 + log(dusecut$n_scions)
+dusecut$dotsize_rootstock <- log(dusecut$n_rootstock)
+dusecut$dotsize_rootstock2 <- (dusecut$n_rootstock)
+
+
+fig <- plot_geo(occurence) %>%
+  layout(
+    geo = list(
+      #scope = "world",
+      showframe = TRUE,
+      showcoastlines = TRUE,
+      showland = TRUE,
+      landcolor = toRGB("white"),
+      countrycolor = toRGB("darkgrey"),
+      coastlinecolor = toRGB("black"),
+      # projection = list(type = "natural earth"),
+      lataxis = list(
+        range = c(-55, 80),
+        showgrid = FALSE
+      ),
+      lonaxis = list(
+        range = c(-130, 160),
+        showgrid = FALSE
+      )
+    )
+  ) %>%
+  add_trace(
+    z = ~count, color = ~count, colors = 'GnBu',
+    text = ~COUNTRY, locations = ~code, marker = list(line = l)) %>%
+  add_markers(
+    x = ~duse$lon, y = ~duse$lat,
+    text = ~duse$title, color = I("black"), size = dusecut$dotsize_rootstock2
+  )
+fig
+
+
+
+save_image(fig,
+           file="/Users/christophe_rouleau-desrochers/Documents/github/asevdiversitydup/figures/mercator_scaled_dots.pdf")
+
+ ### Install reticulate for export
+# install.packages('reticulate')
+# reticulate::install_miniconda()
+# reticulate::conda_install('r-reticulate', 'python-kaleido')
+# reticulate::conda_install('r-reticulate', 'plotly', channel = 'plotly')
+# reticulate::use_miniconda('r-reticulate')
+# 
+# 
+# 
+# save_image(fig, "asevdiversitydup/figures/mercator_worldmap3.png", scale=15)
 
