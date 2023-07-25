@@ -1,4 +1,4 @@
-##======================================================================================================
+##*=============================================================================
 ##  Chloropleth map
 ##  
 ##
@@ -6,9 +6,13 @@
 ## Date:            16.06.2023
 ## Author:          Christophe
 ## Source from:     https://plotly.com/r/choropleth-maps/
-#===================================
+##*=============================================================================
 
+# housekeeping
+rm(list=ls())  
+options(stringsAsFactors=FALSE)
 
+#*------------------------------------------------------------------------------
 
 ### Install packages if not already in system library
 # install.packages("devtools")
@@ -37,30 +41,36 @@ setwd(directory_path)
 d <- read.csv("asevdiversitydup/rootstockxscion/rootstockscionlatlon.csv")
 
 duse <- subset(d, use=="yes")
-head(duse)
+
 # Delete rows where multiple locations for the same paper to avoid redundancy
-duse_no_dupplicats<-duse[!duplicated(duse$title),]
+duse_no_dupplicats <- duse[!duplicated(duse$title),]
+
+# Use dusecut for the moment
+# Jitter locations
+dusecut <- dusecut %>%
+  mutate(lat_jittered = jitter(lat, factor = 50),
+         lon_jittered = jitter(lon, factor = 50))
+
+head(dusecut)
 # Create a new table grouped by country and the number of papers published in each
 occurence <- duse_no_dupplicats %>%
   group_by(COUNTRY) %>%
   summarize(code = first(CODE), count = n())
-head(occurence)
-
 
 #===================================
 
 #### WORLD MAP ####
 
 # Calculate the dot size based on `duse$nb_scion`
-dot_size <- 2 + log(duse$n_rootstock)
-dusecut <- duse [, c("id", "year", "use", "lat", "lon", "n_scions", "n_rootstock", "COUNTRY", "CODE")]
-head(dusecut)
 dusecut$n_rootstock <- as.numeric(dusecut$n_rootstock)
 dusecut$dotsize_scions <- 2 + log(dusecut$n_scions)
-dusecut$dotsize_rootstock <- 2 + log(dusecut$n_rootstock)
-dusecut$dotsize_rootstock2 <- (dusecut$n_rootstock)
+dusecut$dotsize_rootstock <-  0.75*(dusecut$n_rootstock)
+head(dusecut)
 
-
+#### NO JITTERED ####
+# Add legend
+# legend_data <- data.frame(size = unique(dusecut$dotsize_rootstock2))
+# Add figure
 fig <- plot_geo(occurence) %>%
   layout(
     geo = list(
@@ -86,29 +96,130 @@ fig <- plot_geo(occurence) %>%
     z = ~count, color = ~count, colors = 'GnBu',
     text = ~COUNTRY, locations = ~code,
     marker = list(
-      line = list(width = 0.5, color = "black")  
+      line = list(width = 0.5, color = "black")
     ),
     # Edit the colar bar position --> make the X value negative if I want to set it on the left
-    colorbar = list(title = "Number of 
+    colorbar = list(title = "Number of
+papers published
+in each country", x = 1, y = 0.92)
+  ) %>%
+# Dots for which the size is set to the number of rootstocks used in the paper
+  add_trace(
+    type = "scattergeo",
+    lat = ~dusecut$lat, 
+    lon = ~dusecut$lon,
+    text = ~dusecut$title,
+    text = ~dusecut$n_rootstock,
+    mode = "markers",
+    marker = list(
+      size = dusecut$dotsize_rootstock,
+      symbol = "circle",
+      color = "lightgrey",
+      line = list(width = 1, color = "black")
+    )
+  ) %>%
+  layout(title = "No jittered locations")
+# %>% 
+#   layout(
+#   showlegend = TRUE,
+#   legend = list(
+#     itemsizing = "constant",
+#     title = list(text = "Legend Title"),
+#     x = 0.05,
+#     y = 0.95,
+#     bgcolor = "rgba(255, 255, 255, 0.7)",
+#     bordercolor = "black",
+#     borderwidth = 1,
+#     tracegroupgap = 10,
+#     traceorder = "normal"
+#   )
+# )
+
+fig
+
+#### JITTERED LOCATIONS ####
+# Add figure
+fig_jittered <- plot_geo(occurence) %>%
+  layout(
+    geo = list(
+      showframe = TRUE,
+      showcoastlines = TRUE,
+      showland = TRUE,
+      landcolor = toRGB("white"),
+      countrycolor = toRGB("darkgrey"),
+      coastlinecolor = toRGB("black"),
+      coastlinewidth = 0.5,
+      lataxis = list(
+        range = c(-55, 80),
+        showgrid = FALSE
+      ),
+      lonaxis = list(
+        range = c(-130, 160),
+        showgrid = FALSE
+      )
+    )
+  ) %>%
+  # Color gradient set to the number of papers in each country
+  add_trace(
+    z = ~count, color = ~count, colors = 'GnBu',
+    text = ~COUNTRY, locations = ~code,
+    marker = list(
+      line = list(width = 0.5, color = "black")
+    ),
+    # Edit the colar bar position --> make the X value negative if I want to set it on the left
+    colorbar = list(title = "Number of
 papers published
 in each country", x = 1, y = 0.92)
   ) %>%
   # Dots for which the size is set to the number of rootstocks used in the paper
   add_trace(
     type = "scattergeo",
-    lat = ~duse$lat, 
-    lon = ~duse$lon,
-    text = ~duse$title,
+    lat = ~dusecut$lat_jittered, 
+    lon = ~dusecut$lon_jittered,
+    text = ~dusecut$title,
     mode = "markers",
     marker = list(
-      size = dusecut$dotsize_rootstock2,
+      size = dusecut$dotsize_rootstock,
       symbol = "circle",
-      color = "transparent",
+      color = "lightgrey",
       line = list(width = 1, color = "black")
     )
-  ) 
+  ) %>% 
+  layout(title = "With jittered locations")
 
-fig
+# %>% 
+#   layout(
+#     showlegend = TRUE,
+#     legend = list(
+#       itemsizing = "constant",
+#       title = list(text = "Legend Title"),
+#       x = 0.05,
+#       y = 0.95,
+#       bgcolor = "rgba(255, 255, 255, 0.7)",
+#       bordercolor = "black",
+#       borderwidth = 1,
+#       tracegroupgap = 10,
+#       traceorder = "normal"
+#     )
+#   )
+
+fig_jittered
+
+
+
+
+dusecut <- duse [, c("id", "year", "title", "use", "lat", "lon", "n_scions", "n_rootstock", "COUNTRY", "CODE")]
+head(duse)
+str(duse)
+dusecut$n_rootstock <- as.numeric(dusecut$n_rootstock)
+dusecut$dotsize_scions <- 2 + log(duse$n_scions)
+dusecut$dotsize_rootstock <- 2 + log(duse$n_rootstock)
+dusecut$dotsize_rootstock2 <- (duse$n_rootstock)
+
+
+
+
+
 
 
 
