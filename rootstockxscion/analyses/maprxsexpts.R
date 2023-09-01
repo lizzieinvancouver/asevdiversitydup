@@ -1,4 +1,4 @@
-## Started 7 May 2023 ##
+ ## Started 7 May 2023 ##
 ## By Lizzie so far ##
 
 ## On the plane from Zurich to Boston ##
@@ -13,32 +13,26 @@ library(tidyverse)
 # following along:
 # https://www.geeksforgeeks.org/how-to-make-world-map-with-ggplot2-in-r/
 
-#Directory Lizzie
-#setwd("~/Documents/git/projects/vin/general/docs/manuscripts/asevdiversity/rootstockxscion/")
-#Directory Christophe
-directory_path <- "/Users/christophe_rouleau-desrochers/Documents/github"
-# Set Working Directory
-setwd(directory_path)
+# working directory
+setwd("~/Documents/git/projects/vin/general/docs/manuscripts/asevdiversity/rootstockxscion/")
 
-#work directory
-d <- read.csv("asevdiversitydup/rootstockxscion/rootstockscionlatlon.csv")
+d <- read.csv("rootstockscionlatlon.csv")
 
 duse <- subset(d, use=="yes")
 
 world_coordinates <- map_data("world")
-plot<-ggplot() + geom_map(
+ggplot() + geom_map(
     data = world_coordinates, map = world_coordinates,
     aes(long, lat, map_id = region),
     color = "white", fill = "lightgray", size = 0.1  ) + 
 geom_point(
     data = duse,
-    aes(lon, lat, color="darkblue"),
+    aes(lon, lat, color="darkblue"), # darkblue
     alpha = 0.7
 ) +
     theme_bw() + 
     theme(legend.position="none")
-plot
-str(duse)
+
 ## Looking at all recs...
 alld <- read.csv("isi_5May2023.csv")
 
@@ -58,3 +52,14 @@ grapeyears2022 <- subset(grapeyears, Publication.Year<2023)
 plot(n_publications~Publication.Year, data=grapeyears2022, pch=16)
 lines(n_publications~Publication.Year, data=grapeyears2022)
 
+# How many sites?
+unique(paste(d$lat, d$lon))
+
+## Means and stuff 
+mean(duse$n_scions, na.rm=TRUE)
+range(duse$n_scions, na.rm=TRUE)
+mean(as.numeric(duse$n_rootstock), na.rm=TRUE)
+range(as.numeric(duse$n_rootstock), na.rm=TRUE)
+
+nrow(duse)/nrow(d)
+nrow(duse)/nrow(d)*nrow(alld)
