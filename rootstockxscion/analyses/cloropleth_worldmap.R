@@ -49,6 +49,9 @@ duse_no_dupplicats <- duse[!duplicated(duse$title),]
 
 # Sum of papers with no number of rootstock that they used
 sum(is.na(duse_no_dupplicats$n_rootstock))
+
+# Sum of papers used for the map
+sum(length(duse_no_duplicates$id))
 # Min value of N.rootstock
 min(as.numeric(duse_no_duplicates$n_rootstock), na.rm = TRUE)
 # Max value of N.rootstock
@@ -65,8 +68,8 @@ mean(as.numeric(duse_no_duplicates$n_scions), na.rm = TRUE)
 
 # Jitter location for later
 duse_no_dupplicats <- duse_no_dupplicats %>%
-  mutate(lat_jittered = jitter(lat, factor = 50),
-         lon_jittered = jitter(lon, factor = 50))
+  mutate(lat_jittered = jitter(lat, factor = 10),
+         lon_jittered = jitter(lon, factor = 10))
 
 # Create a new table grouped by country and the number of papers published in each
 occurence <- duse_no_dupplicats %>%
@@ -80,10 +83,11 @@ occurence <- duse_no_dupplicats %>%
 # Calculate the dot size based on `duse$nb_scion`
 duse_no_dupplicats$n_rootstock <- as.numeric(duse_no_dupplicats$n_rootstock)
 duse_no_dupplicats$dotsize_scions <- 2 + log(duse_no_dupplicats$n_scions)
-duse_no_dupplicats$dotsize_rootstock <-  0.75*(duse_no_dupplicats$n_rootstock)
-duse_no_dupplicats$dotsize_rootstock_nolog <-  duse_no_dupplicats$n_rootstock
 
-head(duse_no_dupplicats)
+duse_no_dupplicats$dotsize_rootstock <-  as.numeric(0.75*(duse_no_dupplicats$n_rootstock), na.rm=FALSE)
+# Replace NA by zero in order to display a dot, even when there is no mention 
+duse_no_dupplicats["dotsize_rootstock"][is.na(duse_no_dupplicats["dotsize_rootstock"])] <- 0.1
+duse_no_dupplicats$dotsize_rootstock_nolog <-  duse_no_dupplicats$n_rootstock
 
 
 #### NOt JITTERED ####
@@ -170,7 +174,7 @@ fig_jittered <- plot_geo(occurence) %>%
     # Edit the colar bar position --> make the X value negative if I want to set it on the left
     colorbar = list(title = "Number of
 papers published
-in each country", x = 1, y = 0.88)
+in each country", x = 1, y = 1.1, len = 1.03)
   ) %>%
   # Dots for which the size is set to the number of rootstocks used in the paper
   add_trace(
@@ -223,7 +227,7 @@ plt <- plot_geo(occurence) %>%
               size = duse_no_dupplicats$dotsize_rootstock,
               symbol = "circle",
               color = "lightgrey",
-              line = list(width = 1, color = "black")
+              line = list(width = 0.5, color = "black")
             )
   )
 rg <- range(duse_no_dupplicats$dotsize_rootstock_nolog, na.rm = T) # range of sizes 
@@ -306,60 +310,60 @@ save_image(plt_final,
 
 # 
 ##### JITTERED for static version #####
-# 
-# fig_jittered <- plot_geo(occurence) %>%
-#   layout(
-#     geo = list(
-#       showframe = TRUE,
-#       showcoastlines = TRUE,
-#       showland = TRUE,
-#       landcolor = toRGB("white"),
-#       countrycolor = toRGB("darkgrey"),
-#       coastlinecolor = toRGB("black"),
-#       coastlinewidth = 0.5,
-#       lataxis = list(
-#         range = c(-55, 80),
-#         showgrid = FALSE
-#       ),
-#       lonaxis = list(
-#         range = c(-130, 160),
-#         showgrid = FALSE
-#       )
-#     )
-#   ) %>%
-#   # Color gradient set to the number of papers in each country
-#   add_trace(
-#     z = ~count, color = ~count, colors = 'GnBu',
-#     text = ~COUNTRY, locations = ~code,
-#     marker = list(
-#       line = list(width = 0.5, color = "black")
-#     ),
-#     # Edit the colar bar position --> make the X value negative if I want to set it on the left
-#     colorbar = list(title = "Number of
-# papers published
-# in each country", x = 1, y = 0.88)
-#   ) %>%
-#   # Dots for which the size is set to the number of rootstocks used in the paper
-#   add_trace(
-#     type = "scattergeo",
-#     lat = ~duse_no_dupplicats$lat_jittered, 
-#     lon = ~duse_no_dupplicats$lon_jittered,
-#     text = ~paste("Title: ", duse_no_dupplicats$title, "<br>Number of Rootstocks: ", duse_no_dupplicats$n_rootstock),
-#     mode = "markers",
-#     marker = list(
-#       size = 2,
-#       symbol = "circle",
-#       color = "lightgrey",
-#       line = list(width = 1.5, color = "black")
-#     )
-#   ) %>% 
-#   layout(title = "")
-# 
-# fig_jittered
-# 
-# save_image(fig_jittered,
-#            file="/Users/christophe_rouleau-desrochers/Documents/github/asevdiversitydup/figures/mercator_scaled_dots.pdf")
-# # 
+
+fig_jittered <- plot_geo(occurence) %>%
+  layout(
+    geo = list(
+      showframe = TRUE,
+      showcoastlines = TRUE,
+      showland = TRUE,
+      landcolor = toRGB("white"),
+      countrycolor = toRGB("darkgrey"),
+      coastlinecolor = toRGB("black"),
+      coastlinewidth = 0.5,
+      lataxis = list(
+        range = c(-55, 80),
+        showgrid = FALSE
+      ),
+      lonaxis = list(
+        range = c(-130, 160),
+        showgrid = FALSE
+      )
+    )
+  ) %>%
+  # Color gradient set to the number of papers in each country
+  add_trace(
+    z = ~count, color = ~count, colors = 'GnBu',
+    text = ~COUNTRY, locations = ~code,
+    marker = list(
+      line = list(width = 0.5, color = "black")
+    ),
+    # Edit the colar bar position --> make the X value negative if I want to set it on the left
+    colorbar = list(title = "Number of
+papers published
+in each country", x = 1, y = 0.88)
+  ) %>%
+  # Dots for which the size is set to the number of rootstocks used in the paper
+  add_trace(
+    type = "scattergeo",
+    lat = ~duse_no_dupplicats$lat_jittered,
+    lon = ~duse_no_dupplicats$lon_jittered,
+    text = ~paste("Title: ", duse_no_dupplicats$title, "<br>Number of Rootstocks: ", duse_no_dupplicats$n_rootstock),
+    mode = "markers",
+    marker = list(
+      size = 2,
+      symbol = "circle",
+      color = "lightgrey",
+      line = list(width = 1.5, color = "black")
+    )
+  ) %>%
+  layout(title = "")
+
+fig_jittered
+
+save_image(fig_jittered,
+           file="/Users/christophe_rouleau-desrochers/Documents/github/asevdiversitydup/figures/mercator_scaled_dots.pdf")
+#
 # 
 #  ### Install reticulate for export
 # library(reticulate)
