@@ -45,26 +45,26 @@ d[d=='na'] <- 'NA'
 duse <- subset(d, use=="yes")
 
 # Delete rows where multiple locations for the same paper to avoid redundancy
-duse_no_dupplicats <- duse[!duplicated(duse$title),]
+duse_no_dupplicates <- duse[!duplicated(duse$title),]
 
 # Sum of papers with no number of rootstock that they used
-sum(is.na(duse_no_dupplicats$n_rootstock))
+sum(is.na(duse_no_dupplicates$n_rootstock))
 
 # Sum of papers used for the map
-sum(length(duse_no_duplicates$id))
+sum(length(duse_no_dupplicates$id))
 # Min value of N.rootstock
-min(as.numeric(duse_no_duplicates$n_rootstock), na.rm = TRUE)
+min(as.numeric(duse_no_dupplicates$n_rootstock), na.rm = TRUE)
 # Max value of N.rootstock
-max(as.numeric(duse_no_duplicates$n_rootstock), na.rm = TRUE)
+max(as.numeric(duse_no_dupplicates$n_rootstock), na.rm = TRUE)
 # Mean value of N.rootstock
-mean(as.numeric(duse_no_duplicates$n_rootstock), na.rm = TRUE)
+mean(as.numeric(duse_no_dupplicates$n_rootstock), na.rm = TRUE)
 
 # Min value of N.scion
-min(as.numeric(duse_no_duplicates$n_scions), na.rm = TRUE)
+min(as.numeric(duse_no_dupplicates$n_scions), na.rm = TRUE)
 # Max value of N.scion
-max(as.numeric(duse_no_duplicates$n_scions), na.rm = TRUE)
+max(as.numeric(duse_no_dupplicates$n_scions), na.rm = TRUE)
 # Mean value of N.scion
-mean(as.numeric(duse_no_duplicates$n_scions), na.rm = TRUE)
+mean(as.numeric(duse_no_dupplicates$n_scions), na.rm = TRUE)
 
 # Jitter location for later
 duse_no_dupplicats <- duse_no_dupplicats %>%
@@ -85,6 +85,7 @@ duse_no_dupplicats$n_rootstock <- as.numeric(duse_no_dupplicats$n_rootstock)
 duse_no_dupplicats$dotsize_scions <- 2 + log(duse_no_dupplicats$n_scions)
 
 duse_no_dupplicats$dotsize_rootstock <-  as.numeric(0.75*(duse_no_dupplicats$n_rootstock), na.rm=FALSE)
+duse_no_dupplicats$dotsize_rootstock_fixed <- as.numeric(0.5*(duse_no_dupplicats$n_rootstock), na.rm=FALSE)
 # Replace NA by zero in order to display a dot, even when there is no mention 
 duse_no_dupplicats["dotsize_rootstock"][is.na(duse_no_dupplicats["dotsize_rootstock"])] <- 0.1
 duse_no_dupplicats$dotsize_rootstock_nolog <-  duse_no_dupplicats$n_rootstock
@@ -212,7 +213,7 @@ plt <- plot_geo(occurence) %>%
     z = ~count, color = ~count, colors = 'GnBu',
     text = ~COUNTRY, locations = ~code,
     marker = list(
-      line = list(width = 0.5, color = "black")
+      line = list(width = 0.75, color = "black")
     ),
     colorbar = list(title = "Number of papers<br />published in<br />each country",
                     x = 1, y = 1.13, len = 1.08) # longer to give space for title
@@ -224,7 +225,7 @@ plt <- plot_geo(occurence) %>%
             text = ~paste("Title: ", duse_no_dupplicats$title, "<br>Number of Rootstocks: ", duse_no_dupplicats$n_rootstock),
             mode = "markers",
             marker = list(
-              size = duse_no_dupplicats$dotsize_rootstock,
+              size = duse_no_dupplicats$dotsize_rootstock_fixed,
               symbol = "circle",
               color = "lightgrey",
               line = list(width = 0.5, color = "black")
