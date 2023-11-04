@@ -28,18 +28,21 @@ rootstock* AND scion* AND grape* (ALL FIELDS)
 
 we initially retrieved 530 references. From those, we randomly selected 140 articles to review for relevant data. We excluded articles focused on species other than grapes (e.g., grapefruit, kiwis), and a limited set we could not obtain from our university library. We scraped data from the remaining articles.
 % 1Nov2023: Below feels like a short form of the next section, so I would cut it but replace with topic sentence (to optimize short x clarity). 
+% 4Nov2023:Perfect. Indeed it's redundant.
 % We scrutinized these articles to determine their relevance to our research, noting their provenance and the number of rootstocks and scions employed in each experiment. Some of the selected articles.
 
 \subsection{Step 2 – Data scraping}
 
 % 1Nov2023: I'd give the website we used to convert degrees \url{website}
-We recorded the following from each article (when possible): location, number of rootstocks and number of scions. We recorded the geographical locations in decimals where each study was conducted. If the location was given in hour/degree/minutes, we converted it in decimals to ensure consistency (using XX website). In cases where explicit coordinates were absent, we derived decimal coordinates based on the most precise location information available as follows: (1) if the study mentioned the name of the vineyard or campus where the experiment occurred, we used those location details, or (2) when no location was given, we estimated the location based on first author’s affiliation. We report the method that we used for location in the \emph{how} column of rootstockscionlatlon dataset. % 1Nov2023: spreadsheet is sort of an excel term, and you'll likely upload as csv so I would avoid the term
+% 4Nov2023URL is ok I believe
+We recorded the following from each article (when possible): location, number of rootstocks and number of scions. We recorded the geographical locations in decimals where each study was conducted. If the location was given in hour/degree/minutes, we converted it in decimals to ensure consistency (using \url{https://www.fcc.gov/media/radio/dms-decimal} ). In cases where explicit coordinates were absent, we derived decimal coordinates based on the most precise location information available as follows: (1) if the study mentioned the name of the vineyard or campus where the experiment occurred, we used those location details, or (2) when no location was given, we estimated the location based on first author’s affiliation. We report the method that we used for location in the \emph{how} column of rootstockscionlatlon dataset. % 1Nov2023: spreadsheet is sort of an excel term, and you'll likely upload as csv so I would avoid the term
 
 Additionally, some of the papers retrieved from the ISI search were review articles. For these, we extracted relevant data if it was explicitly presented within the article. In instances where certain information was missing, we conducted further searches to locate and include the specific studies mentioned in the review paper. We documented the ID number of the review paper that led us to the referenced article in the \emph{source\_paper\_id} column within the rootstockscionlatlon dataset.
 
 % 1Nov2023: Subsequently -> next (when you can, use simpler terms usually)
 % 1Nov2023: This is part of scraping so I moved it up. Also, to be consistent I would give the column names here also. 
-Next, we determined the number of rootstocks and scions utilized in each experiment. When the data was available, we noted how many of each were used. 
+% 4Nov2023: Perfect. Column names are added here. 
+Next, we determined the number of rootstocks and scions utilized in each experiment. When the data was available, we noted how many of each were used in the \emph{n\_rootstock} and \emph{n\_scions} columns.
 
 \subsection{Step 3 – Mapping rootstocks / scion data}
 Then using Plotly package in R, we created a choropleth map where the color gradient corresponds to the number of articles investigating rootstock x scion interactions in each country. We also adjusted the size gradient of the data points to reflect the number of rootstock varieties used in each study. The interactive version (HTML) was all created in R and the static version (SVG) was partially created in R. A second legend displaying the meaning of the dot sizes was created in Adobe Illustrator.
