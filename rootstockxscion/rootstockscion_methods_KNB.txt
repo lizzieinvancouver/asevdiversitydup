@@ -46,3 +46,21 @@ rootstockscionlatlon.csv
 Description:
 Rootstock x scion interaction data set in which locations and rootstock and scion numbers were extracted.
 
+Columns: 
+id: extracted from the subset of 530 references
+Author: authors of the article
+Title: title of the article
+Use: did we use the data for the map?
+ifno_why: note on the decision of the previous column
+Where: location of the experiment
+Lat : latitude of the experiment
+Long: longitude of the experiment
+How: note on how the lat/long were extracted
+Paper_link: url of the article 
+Who : Who scrapped the data. EMW (Elizabeth M Wolkovich) or CRD (Christophe Rouleau-Desrochers)
+n_scions: number of scions reported from being used in the article
+n_rootstocks : number of rootstocks reported from being used in the article
+source_paper_id : id of the meta-analysis from which the data was extracted
+source_paper_title: title of the meta-analysis from which the data was extracted
+COUNTRY: country where the experiment was conducted
+CODE0: code of the country where the experiment was conducted
