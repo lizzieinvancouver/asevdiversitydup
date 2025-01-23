@@ -37,7 +37,6 @@ parameters <- list(
   list(Tmin = -40, Topt = 15, Tmax = 40) # figure 6
 )
 
-
 # Generate and save 5 different figures
 for (i in 1:6) {
   # Extract parameters for this figure
@@ -57,22 +56,24 @@ for (i in 1:6) {
   
   # Plot the continuous line
   plot(
-    x, y, type = "l", lwd = 2, col = "black", xlab = "x", ylab = "y",
-    main = paste("rootstock1_", i)
+    x, y, type = "l", lwd = 8, col = "black", xlab = "", ylab = "",
+    main = "", bty = "l", xaxt = "n", yaxt = "n",
   )
-  
+  # keep ticks, remove their labels
+  axis(1, labels = FALSE, tick = TRUE) 
+  axis(2, labels = FALSE, tick = TRUE) 
   # Define dots with varying numbers and positions
   n_dots <- 3 + (i %% 3)  # Alternate between 3, 4, and 5 dots
   x_dots <- sort(seq(Tmin + 10, Tmax - 10, length.out = n_dots))  # Equally spaced dots
   y_dots <- sapply(x_dots, wang, Tmin = Tmin, Topt = Topt, Tmax = Tmax)
   
   # Add dots to the curve
-  points(x_dots, y_dots, pch = 1, col = "black", cex = 3)
+  points(x_dots, y_dots, pch = 19, col = "black", cex = 4)
   
   # Close the pdf device
   dev.off()
 }
-  
+
 
 # === === === === === === === === === === === === === === ===
 # Set parameters for the 3 figures of rootstock 2
@@ -101,22 +102,25 @@ for (i in 1:3) {
   
   # Plot the continuous line
   plot(
-    x, y, type = "l", lwd = 2, col = "black", xlab = "x", ylab = "y",
-    main = paste("rootstock2_", i)
+    x, y, type = "l", lwd = 8, col = "#c83034", xlab = "", ylab = "",
+    main = "", bty = "l", xaxt = "n", yaxt = "n",
   )
-  
+  # keep ticks, remove their labels
+  axis(1, labels = FALSE, tick = TRUE) 
+  axis(2, labels = FALSE, tick = TRUE) 
   # Define dots with varying numbers and positions
   n_dots <- 3 + (i %% 3)  # Alternate between 3, 4, and 5 dots
   x_dots <- sort(seq(Tmin + 10, Tmax - 10, length.out = n_dots))  # Equally spaced dots
   y_dots <- sapply(x_dots, wang, Tmin = Tmin, Topt = Topt, Tmax = Tmax)
   
   # Add dots to the curve
-  points(x_dots, y_dots, pch = 1, col = "black", cex = 3)
+  points(x_dots, y_dots, pch = 19, col = "black", cex = 4)
   
   # Close the pdf device
   dev.off()
 }
- 
+
+
 # === === === === === === === === === === === === === === ===
 # Set parameters for the 2 ND figures of Rootstock 2
 # === === === === === === === === === === === === === === ===
@@ -145,9 +149,12 @@ for (i in 1:2) {
   
   # Plot the continuous line
   plot(
-    x, y, type = "l", lwd = 2, col = "black", lty = 2, xlab = "x", ylab = "y",
-    main = paste("rootstock2ND_", i)
+    x, y, type = "l", lwd = 8, col = "#c83034", lty = 2, xlab = "", ylab = "",
+    main = "", bty = "l", xaxt = "n", yaxt = "n",
   )
+  # keep ticks, remove their labels
+  axis(1, labels = FALSE, tick = TRUE) 
+  axis(2, labels = FALSE, tick = TRUE) 
   # Close the pdf device
   dev.off()
 }
@@ -179,17 +186,19 @@ for (i in 1:2) {
   
   # Plot the continuous line
   plot(
-    x, y, type = "l", lwd = 2, col = "black", xlab = "x", ylab = "y",
-    main = paste("rootstock3_", i)
+    x, y, type = "l", lwd = 8, col = "#003a7d", xlab = "", ylab = "",
+    main = "", bty = "l", xaxt = "n", yaxt = "n",
   )
-  
+  # keep ticks, remove their labels
+  axis(1, labels = FALSE, tick = TRUE) 
+  axis(2, labels = FALSE, tick = TRUE) 
   # Define dots with varying numbers and positions
   n_dots <- 3 + (i %% 3)  # Alternate between 3, 4, and 5 dots
   x_dots <- sort(seq(Tmin + 10, Tmax - 10, length.out = n_dots))  # Equally spaced dots
   y_dots <- sapply(x_dots, wang, Tmin = Tmin, Topt = Topt, Tmax = Tmax)
   
   # Add dots to the curve
-  points(x_dots, y_dots, pch = 1, col = "black", cex = 3)
+  points(x_dots, y_dots, pch = 19, col = "black", cex = 4)
   
   # Close the pdf device
   dev.off()
@@ -222,10 +231,59 @@ for (i in 1:3) {
   
   # Plot the continuous line
   plot(
-    x, y, type = "l", lwd = 2, col = "black", lty = 2, xlab = "x", ylab = "y",
-    main = paste("rootstock2ND_", i)
+    x, y, type = "l", lwd = 8, col = "#003a7d", lty = 2, xlab = "", ylab = "",
+    main = "", bty = "l", xaxt = "n", yaxt = "n",
   )
+  # keep ticks, remove their labels
+  axis(1, labels = FALSE, tick = TRUE) 
+  axis(2, labels = FALSE, tick = TRUE) 
   # Close the pdf device
   dev.off()
 }
+
+
+# === === === === === === === === === === === === === === ===
+# Universal relationship
+# === === === === === === === === === === === === === === ===\
+# Adjust the spacing of axis labels and titles using mgp
+par(mgp = c(1, -5, 0)) # Adjust the first value for axis title position
+
+parameters <- list(
+  list(Tmin = -40, Topt = 25, Tmax = 40), # curve rootstock 1
+  list(Tmin = -40, Topt = 30, Tmax = 40), # curve rootstock 2
+  list(Tmin = -40, Topt = 20, Tmax = 40)  # curve rootstock 3
+)
+colors <- c("black", "#c83034", "#003a7d")
+line_styles <- c(1, 2, 2) # Specify line styles for each curve
+
+# Open a single PDF device
+pdf("universalcurves.pdf", width = 6, height = 8)
+
+# Define the continuous x range
+x <- seq(-40, 40, 0.01)  # Extend range to fit all curves
+
+# Set up the plot for multiple curves
+plot(NULL, xlim = range(x), ylim = c(0, 1), xlab = "Environment", ylab = "Process (e.g. rate)", 
+     main = "", bty = "l", xaxt = "n", yaxt = "n", mgp = c(2, 0.5, 0))  # Adjust label position
+
+# Add x and y axes with ticks but no tick labels
+axis(1, labels = FALSE, tick = TRUE) # x-axis with ticks but no tick labels
+axis(2, labels = FALSE, tick = TRUE) # y-axis with ticks but no tick labels
+
+# Loop through each parameter set to add curves to the same plot
+for (i in 1:3) {
+  # Extract parameters for this curve
+  Tmin <- parameters[[i]]$Tmin
+  Topt <- parameters[[i]]$Topt
+  Tmax <- parameters[[i]]$Tmax
+  
+  # Calculate the curve
+  y <- sapply(x, wang, Tmin = Tmin, Topt = Topt, Tmax = Tmax)
+  
+  # Add the curve to the plot with specified color and line style
+  lines(x, y, lwd = 3, lty = line_styles[i], col = colors[i])
+}
+
+# Close the PDF device
+dev.off()
 
